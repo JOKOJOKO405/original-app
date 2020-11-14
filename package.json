@@ -1,0 +1,19 @@
+{
+  "name": "lunchpad",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "nuxt",
+    "build": "nuxt build",
+    "start": "nuxt start",
+    "generate": "nuxt generate"
+  },
+  "dependencies": {
+    "core-js": "^3.6.5",
+    "firebase": "^8.0.2",
+    "firestore": "^1.1.6",
+    "nuxt": "^2.14.6",
+    "vuex": "^3.5.1"
+  },
+  "devDependencies": {}
+}
