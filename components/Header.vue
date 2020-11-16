@@ -9,20 +9,20 @@
       <template v-if="isLogin">
         <div>
           <span class="header__link">
-            <nuxt-link to="/"><img src="@/assets/img/ico_home.svg" alt="ホーム"></nuxt-link>
+            <img src="@/assets/img/ico_home.svg" alt="ホーム">
           </span>
           <span class="header__link">
-            <nuxt-link to="/"><img src="@/assets/img/ico_user_w.svg" alt="マイページ"></nuxt-link>
+            <img src="@/assets/img/ico_user_w.svg" alt="マイページ">
           </span>
         </div>
       </template>
       <template v-else>
         <div>
           <span class="header__link">
-            <nuxt-link to="/">新規登録</nuxt-link>
+            新規登録
           </span>
-          <span class="header__link">
-            <nuxt-link to="/">ログイン</nuxt-link>
+          <span class="header__link" @click="isLoginPage">
+            ログイン
           </span>
         </div>
       </template>
@@ -37,14 +37,25 @@ export default {
       isLogin: false,
     };
   },
+  methods: {
+    isLoginPage(){
+      this.router.push('/login')
+    },
+    isSignUpPage(){
+      this.$router.push('/signup')
+    },
+    isHome(){
+      this.router.push('/')
+    },
+    isMyPage(userId){
+      this.router.push(`/user/${userId}`)
+    }
+  }
 };
 </script>
 
 <style lang="scss">
 @import "@/assets/css/main";
-.v-application a {
-  color: #fff;
-}
 .header {
   background: $primary-gradient;
   padding: 10px 16px;
@@ -54,6 +65,7 @@ export default {
   &__link{
     display: inline-block;
     font-weight: bold;
+    color: #fff;
     &:first-child{
       margin-right: 16px;
     }
