@@ -14,11 +14,15 @@ $font-lr: 24px;
 $radius-lr: 40px;
 $radius-sm: 8px;
 
+// TODO mainのpadding
 html{
   height: 100%;
 }
 body{
   color: $font-color;
+}
+.main{
+  padding-top: 24px;
 }
 a{
   text-decoration: none;
