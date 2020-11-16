@@ -1,17 +1,62 @@
 <template>
-  <header>
-    
+  <header class="header">
+    <v-layout class="align-center justify-space-between">
+      <v-flex>
+        <nuxt-link to="/">
+          <img class="header__logo" src="@/assets/img/logo.svg" alt="" />
+        </nuxt-link>
+      </v-flex>
+      <template v-if="isLogin">
+        <div>
+          <span class="header__link">
+            <nuxt-link to="/"><img src="@/assets/img/ico_home.svg" alt="ホーム"></nuxt-link>
+          </span>
+          <span class="header__link">
+            <nuxt-link to="/"><img src="@/assets/img/ico_user_w.svg" alt="マイページ"></nuxt-link>
+          </span>
+        </div>
+      </template>
+      <template v-else>
+        <div>
+          <span class="header__link">
+            <nuxt-link to="/">新規登録</nuxt-link>
+          </span>
+          <span class="header__link">
+            <nuxt-link to="/">ログイン</nuxt-link>
+          </span>
+        </div>
+      </template>
+    </v-layout>
   </header>
 </template>
 
 <script>
-export default {};
+export default {
+  data() {
+    return {
+      isLogin: false,
+    };
+  },
+};
 </script>
 
 <style lang="scss">
-@import '@/assets/css/main';
-  header {
-    background: $primary-gradient;
-    padding: 16px;
+@import "@/assets/css/main";
+.v-application a {
+  color: #fff;
+}
+.header {
+  background: $primary-gradient;
+  padding: 10px 16px;
+  &__logo {
+    width: 88px;
   }
+  &__link{
+    display: inline-block;
+    font-weight: bold;
+    &:first-child{
+      margin-right: 16px;
+    }
+  }
+}
 </style>
