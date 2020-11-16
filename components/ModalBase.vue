@@ -51,9 +51,10 @@ export default {
     background: #fff;
     padding: 16px;
     border-radius: $radius-sm;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, 50%);
+    top: 16px;
+    left: 0;
+    right: 0;
+    margin: auto;
   }
   &__btn{
     @include circleBtn(40px);
