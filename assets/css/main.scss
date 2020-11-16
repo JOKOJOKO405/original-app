@@ -29,9 +29,13 @@ a{
   border-radius: $radius-lr;
   display: block;
   width: $width;
+  margin: 0 auto 16px;
 }
 
 %psedo{
   content: '';
   position: absolute;
+}
+.theme--light.v-application{
+  background: none;
 }
