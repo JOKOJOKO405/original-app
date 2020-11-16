@@ -1,5 +1,6 @@
 <template>
-  <TopBg>
+  <main>
+  <TopBg />
     <div class="inner">
       <Logo />
       <GoogleLogin label="Googleアカウントでログイン" @google-login="googleLogin" />
@@ -10,7 +11,7 @@
         アカウントをお持ちでない方はこちら
       </p>
     </div>
-  </TopBg>
+  </main>
 </template>
 
 <script>
