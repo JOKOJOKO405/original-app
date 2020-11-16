@@ -7,7 +7,7 @@
 <style lang="scss">
   h1{
     max-width: 227px;
-    margin: 104px auto;
+    margin: 104px auto 96px;
     img{
       display: block;
       width: 100%;
