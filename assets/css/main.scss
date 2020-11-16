@@ -3,6 +3,7 @@ $font-color: #272727;
 $light-gray: #a2a2a2;
 $bg-color: #fffbf2;
 $primary-gradient: linear-gradient(to right, #FA5C4F 0%, #FF7F00 100%);
+$btn-gradient: linear-gradient(to bottom, #FA5C4F 0%, #FF7F00 100%);
 
 
 $font-sm: 12px;
@@ -40,6 +41,20 @@ a{
   display: block;
   width: $width;
   margin: 0 auto 16px;
+}
+@mixin circleBtn($size, $pad: 8px){
+  width: $size;
+  height: $size;
+  background: $btn-gradient;
+  position: absolute;
+  right: 16px;
+  border-radius: 50%;
+  z-index: 2;
+  padding: $pad;
+  img{
+    display: block;
+    width: 100%;
+  }
 }
 
 %psedo{
