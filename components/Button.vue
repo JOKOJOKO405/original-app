@@ -14,6 +14,5 @@ export default {
 @import "@/assets/css/main";
   .btn-primary{
     @include btn($primary-color, #fff);
-    margin-bottom: 16px;
 }
 </style>
