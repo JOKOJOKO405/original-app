@@ -1,22 +1,26 @@
 <template>
-  <div class="inner">
-    <Logo />
-    <GoogleLogin label="Googleアカウントでログイン" @google-login="googleLogin" />
-    <Button label="メールアドレスでログイン" @onSubmit="onSubmit" />
-    <p class="login__text"
-      @click="onSubmit"
-    >
-      アカウントをお持ちでない方はこちら
-    </p>
-  </div>
+  <TopBg>
+    <div class="inner">
+      <Logo />
+      <GoogleLogin label="Googleアカウントでログイン" @google-login="googleLogin" />
+      <Button label="メールアドレスでログイン" @on-submit="onSubmit" />
+      <p class="login__text"
+        @click="onSubmit"
+      >
+        アカウントをお持ちでない方はこちら
+      </p>
+    </div>
+  </TopBg>
 </template>
 
 <script>
+import TopBg from '~/components/TopBg'
 import Logo from '~/components/Logo'
 import Button from '~/components/Button'
 import GoogleLogin from '~/components/GoogleLogin'
 export default {
   components: {
+    TopBg,
     Logo,
     Button,
     GoogleLogin,
@@ -41,4 +45,3 @@ export default {
     }
   }
 </style>
-
