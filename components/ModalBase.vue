@@ -18,7 +18,6 @@ export default {
 </script>
 
 <style lang="scss">
-@import "@/assets/css/main";
 .v-leave-active,
 .v-enter-active {
   transition: opacity 0.4s ease-out;

@@ -10,7 +10,6 @@ export default {
 </script>
 
 <style lang="scss">
-@import "@/assets/css/main";
   .bg-img{
     position: absolute;
     background: url('~@/assets/img/bg_img.png') center center repeat-y;

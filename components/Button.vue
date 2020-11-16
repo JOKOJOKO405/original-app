@@ -11,7 +11,6 @@ export default {
 </script>
 
 <style lang="scss">
-@import "@/assets/css/main";
   .btn-primary{
     @include btn($primary-color, #fff);
 }

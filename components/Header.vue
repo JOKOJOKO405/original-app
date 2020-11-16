@@ -55,7 +55,6 @@ export default {
 </script>
 
 <style lang="scss">
-@import "@/assets/css/main";
 .header {
   background: $primary-gradient;
   padding: 10px 16px;

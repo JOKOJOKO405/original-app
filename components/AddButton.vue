@@ -11,7 +11,6 @@ export default {
 </script>
 
 <style lang="scss">
-@import "@/assets/css/main";
   .addBtn {
     @include circleBtn(60px, 16px);
     bottom: 16px;

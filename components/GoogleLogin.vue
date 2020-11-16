@@ -11,7 +11,6 @@ export default {
 </script>
 
 <style lang="scss">
-@import "@/assets/css/main";
   .btn-google{
     @include btn(#fff, $font-color);
     border: 1px solid $light-gray;
