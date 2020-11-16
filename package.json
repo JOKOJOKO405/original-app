@@ -14,9 +14,12 @@
     "firebase": "^8.0.2",
     "firestore": "^1.1.6",
     "nuxt": "^2.14.6",
+    "nuxt-sass-resources-loader": "^2.0.5",
     "sass": "^1.29.0",
     "sass-loader": "^8.0.0",
     "vuex": "^3.5.1"
   },
-  "devDependencies": {}
+  "devDependencies": {
+    "@nuxtjs/style-resources": "^1.0.0"
+  }
 }
