@@ -18,7 +18,7 @@
       </template>
       <template v-else>
         <div>
-          <span class="header__link">
+          <span class="header__link" @click="isSignUpPage">
             新規登録
           </span>
           <span class="header__link" @click="isLoginPage">
