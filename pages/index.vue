@@ -1,6 +1,6 @@
 <template>
   <div class="inner">
-    <Button label="はじめる" @click="isLogin" />
+    <Button label="はじめる" @onSubmit="onSubmit" />
   </div>
 </template>
 
@@ -11,8 +11,8 @@ export default {
     Button,
   },
   methods: {
-    isLogin(){
-      $router.push('/login')
+    onSubmit(){
+      this.$router.push('/login')
     }
   }
 }
