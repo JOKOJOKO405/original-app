@@ -20,3 +20,18 @@ a{
 .inner{
   padding: 0 16px;
 }
+@mixin btn($bg, $col, $width: 100%){
+  background-color: $bg;
+  color: $col;
+  text-align: center;
+  font-weight: bold;
+  padding: 10px;
+  border-radius: $radius-lr;
+  display: block;
+  width: $width;
+}
+
+%psedo{
+  content: '';
+  position: absolute;
+}
