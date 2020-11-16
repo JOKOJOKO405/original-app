@@ -1,6 +1,5 @@
 <template>
   <div class="bg-img">
-    <slot />
   </div>
 </template>
 
@@ -18,7 +17,7 @@ export default {
     background-size: contain;
     width: 100%;
     height: 100%;
-    z-index: -2;
+    z-index: -1;
     &::before{
       @extend %psedo;
       width: 100%;
