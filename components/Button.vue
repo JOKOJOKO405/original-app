@@ -1,5 +1,5 @@
 <template>
-  <button class="btn-primary" @click="$emit('on-submit')">
+  <button class="btn-primary" @click.prevent="addEvent">
     {{ label }}
   </button>
 </template>
@@ -7,6 +7,11 @@
 <script>
 export default {
   props: ['label'],
+  methods: {
+    addEvent(){
+      this.$emit('event')
+    }
+  }
 }
 </script>
 

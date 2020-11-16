@@ -4,7 +4,7 @@
     <div class="inner">
       <Logo />
       <GoogleLogin label="Googleアカウントでログイン" @google-login="googleLogin" />
-      <Button label="メールアドレスでログイン" @on-submit="onSubmit" />
+      <Button label="メールアドレスでログイン" @event="onSubmit" />
       <p class="login__text"
         @click="onSubmit"
       >

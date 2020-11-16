@@ -2,7 +2,7 @@
   <main>
     <div class="inner">
       <Form />
-      <Button label="ログイン" @on-submit="onSubmit" />
+      <Button label="ログイン" @event="onSubmit" />
       <GoogleLogin label="Googleアカウントでログイン" @google-login="googleLogin" />
     </div>
   </main>
