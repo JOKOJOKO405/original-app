@@ -1,10 +1,22 @@
 <template>
   <v-app>
-    <Nuxt />
+    <v-content>
+      <Header />
+      <Nuxt />
+    </v-content>
   </v-app>
 </template>
 
-<style>
+<script>
+import Header from '~/components/Header'
+export default {
+  components: {
+    Header,
+  },
+}
+</script>
+
+<style lang="scss">
 *,
 *::before,
 *::after {
