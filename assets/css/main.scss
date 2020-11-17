@@ -58,6 +58,9 @@ a{
 }
 
 .modalCard {
+  &__input{
+    margin-bottom: 24px;
+  }
   &__container{
     padding: 16px;
   }
@@ -66,14 +69,29 @@ a{
     font: {
       weight: bold;
       size: $font-lr;
-      margin-bottom: $font-lr;
     }
+    margin-bottom: $font-lr;
   }
   &__userIcon{
     width: 120px;
     height: 120px;
     border-radius: 50%;
-    margin-bottom: 16px;
+    margin: 0 auto 16px;
+    position: relative;
+    input[type="file"]{
+      opacity: 0;
+      position: absolute;
+      display: block;
+      top: 0;
+      width: 120px;
+      height: 100%;
+    }
+    .userImg{
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 50%;
+    }
   }
   &__Img{
     width: 100%;
