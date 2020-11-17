@@ -30,12 +30,12 @@
         required
       ></v-text-field>
 
-      <v-text-field
+      <v-textarea
         v-model="user.comment.val"
         :rules="user.comment.rules"
         label="自己紹介"
         :counter="150"
-      ></v-text-field>
+      ></v-textarea>
       <Button label="変更" @event="done" />
     </v-form>
   </div>
@@ -92,6 +92,7 @@ export default {
         this.user.image.val = e.target.result
       }
       reader.readAsDataURL(files[0])
+      // TODO 画像アップロード
       console.log(this.user.image.val)
     }
   }
@@ -99,4 +100,7 @@ export default {
 </script>
 
 <style lang="scss">
+  .btn-primary{
+    margin-top: 32px;
+  }
 </style>
