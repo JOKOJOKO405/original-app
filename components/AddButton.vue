@@ -6,7 +6,11 @@
 
 <script>
 export default {
-  
+  methods: {
+    addCard() {
+      this.$emit('add-card')
+    }
+  }
 }
 </script>
 
