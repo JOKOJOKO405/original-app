@@ -4,7 +4,24 @@
     <v-form
       ref="form"
       lazy-validation
-    >
+    > 
+      <div class="modalCard__userIcon">
+        <template v-if="user.image.val">
+          <img
+            :src="user.image.val"
+            class="userImg"
+          >
+        </template>
+        <template v-else>
+          <img src="@/assets/img/ico_user.svg" alt="">
+        </template>
+        <input
+          type="file"
+          ref="image"
+          accept="image/png,image/jpeg"
+          @change="selectedImage"
+        >
+      </div>
       <v-text-field
         v-model="user.name.val"
         :counter="20"
@@ -55,6 +72,9 @@ export default {
               )
             },
           ]
+        },
+        image: {
+          val: null,
         }
       }
     }
@@ -62,6 +82,17 @@ export default {
   methods: {
     done(){
       console.log('ok')
+    },
+    selectedImage(e){
+      const files = e.target.files;
+      if (files.length === 0) return;
+
+      const reader = new FileReader()
+      reader.onload = (e) => {
+        this.user.image.val = e.target.result
+      }
+      reader.readAsDataURL(files[0])
+      console.log(this.user.image.val)
     }
   }
 }
