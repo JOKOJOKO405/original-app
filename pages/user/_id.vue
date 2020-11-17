@@ -1,8 +1,11 @@
 <template>
   <div class="inner">
     ここはユーザーページ
-    <ModalBase v-if="isModalOpened" @close-modal="closeModal">
+    <ModalBase v-if="isEditing" @close-modal="closeModal">
       <EditProfile />
+    </ModalBase>
+    <ModalBase v-if="isCreate" @close-modal="closeModal">
+      <CreatePost />
     </ModalBase>
     一覧
     <AddButton @add-card="addCard" />
@@ -12,6 +15,7 @@
 <script>
 import ModalBase from '~/components/ModalBase'
 import EditProfile from '~/components/EditProfile'
+import CreatePost from '~/components/CreatePost'
 import AddButton from '~/components/AddButton'
 export default {
   components: {
@@ -21,16 +25,21 @@ export default {
   },
   data(){
     return {
-      isModalOpened: true,
+      isEditing: false,
+      isCreate: false,
     }
   },
   methods: {
     closeModal(){
-      this.isModalOpened = false
+      this.isEditing = false
+      this.isCreate = false
+    },
+    editProfile(){
+      this.isCreate = true
     },
     addCard(){
-      this.isModalOpened = true
-    },
+      this.isCreate = true
+    }
   }
 }
 </script>
