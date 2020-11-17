@@ -1,6 +1,6 @@
 <template>
   <div class="inner">
-    ここはユーザーページ
+    <User name="てすと" />
     <ModalBase v-if="isEditing" @close-modal="closeModal">
       <EditProfile />
     </ModalBase>
@@ -13,12 +13,14 @@
 </template>
 
 <script>
+import User from '~/components/User'
 import ModalBase from '~/components/ModalBase'
 import EditProfile from '~/components/EditProfile'
 import CreatePost from '~/components/CreatePost'
 import AddButton from '~/components/AddButton'
 export default {
   components: {
+    User,
     ModalBase,
     EditProfile,
     AddButton,
@@ -35,7 +37,7 @@ export default {
       this.isCreate = false
     },
     editProfile(){
-      this.isCreate = true
+      this.isEditing = true
     },
     addCard(){
       this.isCreate = true
