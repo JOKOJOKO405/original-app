@@ -47,6 +47,7 @@ export default {
   &__content{
     position: absolute;
     width: calc(100% - 32px);
+    height: calc(100% - 32px);
     overflow-y: scroll;
     background: #fff;
     padding: 16px;
@@ -55,10 +56,12 @@ export default {
     left: 0;
     right: 0;
     margin: auto;
+    overflow-y: scroll;
   }
   &__btn{
     @include circleBtn(40px);
-    top: 16px;
+    top: 8px;
+    right: 8px;
   }
 }
 </style>
