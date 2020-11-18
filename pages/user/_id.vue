@@ -4,50 +4,88 @@
       <h2 class="user__message">ようこそ、{{ user.name }}さん</h2>
       <dl class="user__prof">
         <dt>
-          <template v-if="isUser"> </template>
+          <template v-if="isUser"></template>
           <template v-else>
             <img src="@/assets/img/ico_user.svg" alt="" />
           </template>
         </dt>
         <dd>
-          <p>
+          <h3 class="user__name">
             {{ user.name }}
-          </p>
+          </h3>
+          <Button label="プロフィール編集" @event="editProfile" />
         </dd>
       </dl>
     </div>
+    <template v-if="user.posts">
+      <div class="user__post-title">
+        <h4 class="title">投稿したランチ</h4>
+        <p class="count">{{ user.posts.length }}件</p>
+      </div>
+      <ul class="user__posts">
+        <li v-for="(post, index) in user.posts" class="user__item" :key="post.id">
+          <img :src="post.image" alt="">
+        </li>
+      </ul>
+    </template>
+    <template v-else>
+      <p>まだ投稿がありません</p>
+    </template>
+
     <ModalBase v-if="isEditing" @close-modal="closeModal">
       <EditProfile />
     </ModalBase>
     <ModalBase v-if="isCreate" @close-modal="closeModal">
       <CreatePost />
     </ModalBase>
-    一覧
     <AddButton @add-card="addCard" />
   </div>
 </template>
 
 <script>
-import ModalBase from "~/components/ModalBase";
-import EditProfile from "~/components/EditProfile";
-import CreatePost from "~/components/CreatePost";
-import AddButton from "~/components/AddButton";
+import ModalBase from "~/components/ModalBase"
+import EditProfile from "~/components/EditProfile"
+import CreatePost from "~/components/CreatePost"
+import AddButton from "~/components/AddButton"
+import Button from "~/components/Button"
 export default {
   components: {
     ModalBase,
     EditProfile,
     CreatePost,
     AddButton,
+    Button
   },
   data() {
     return {
       user: {
         name: "ユーザー1",
         image: "@/assets/img/ico_user.svg",
+        // TODO dbからデータ吐き出し imageあとで削除
         posts: [
           {
             id: "1",
-            image: "",
+            image: require("@/assets/img/01.jpeg"),
+          },
+          {
+            id: "2",
+            image: require("@/assets/img/02.jpeg"),
+          },
+          {
+            id: "3",
+            image: require("@/assets/img/03.jpeg"),
+          },
+          {
+            id: "4",
+            image: require("@/assets/img/04.jpeg"),
+          },
+          {
+            id: "5",
+            image: require("@/assets/img/05.jpeg"),
+          },
+          {
+            id: "6",
+            image: require("@/assets/img/06.jpeg"),
           },
         ],
       },
@@ -83,12 +121,57 @@ export default {
   }
   &__prof {
     display: flex;
+    margin-bottom: 40px;
     dt {
       width: 120px;
     }
     dd {
       width: calc(100% - 120px);
       padding-left: 16px;
+    }
+  }
+  &__name{
+    @include title($font-color);
+  }
+  &__posts{
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+  }
+  &__post-title{
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    margin-bottom: 8px;
+    width: 100%;
+    .count{
+      font-size: $font-sm;
+      color: $light-gray;
+    }
+    .title{
+      font-size: $font-lg;
+      font-weight: bold;
+    }
+  }
+  &__item{
+    position: relative;
+    width: calc((100% / 3) - (16px / 3));
+    margin-bottom: 8px;
+    &:not(:nth-child(3n)){
+      margin-right: 8px;
+    }
+    &::before{
+      content: '';
+      display: block;
+      padding-top: 100%;
+    }
+    img{
+      position: absolute;
+      @extend %psedo-all;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 8px;
     }
   }
 }
