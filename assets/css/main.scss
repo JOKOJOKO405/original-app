@@ -1,10 +1,9 @@
-$primary-color: #FA5C4F;
+$primary-color: #fa5c4f;
 $font-color: #272727;
 $light-gray: #a2a2a2;
 $bg-color: #fffbf2;
-$primary-gradient: linear-gradient(to right, #FA5C4F 0%, #FF7F00 100%);
-$btn-gradient: linear-gradient(to bottom, #FA5C4F 0%, #FF7F00 100%);
-
+$primary-gradient: linear-gradient(to right, #fa5c4f 0%, #ff7f00 100%);
+$btn-gradient: linear-gradient(to bottom, #fa5c4f 0%, #ff7f00 100%);
 
 $font-sm: 12px;
 $font-nor: 16px;
@@ -15,23 +14,35 @@ $font-lr: 24px;
 $radius-lr: 40px;
 $radius-sm: 8px;
 
-// TODO mainのpadding
-html{
+* {
+  &,
+  &::before,
+  &::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+}
+html {
   height: 100%;
 }
-body{
+body {
   color: $font-color;
 }
-.main{
+// TODO mainのpadding
+.main {
   padding-top: 24px;
 }
-a{
+a {
   text-decoration: none;
 }
-.inner{
+.inner {
   padding: 0 16px;
 }
-@mixin btn($bg, $col, $width: 100%){
+li {
+  list-style: none;
+}
+@mixin btn($bg, $col, $width: 100%) {
   background-color: $bg;
   color: $col;
   text-align: center;
@@ -42,7 +53,7 @@ a{
   width: $width;
   margin: 0 auto 16px;
 }
-@mixin circleBtn($size, $pad: 8px){
+@mixin circleBtn($size, $pad: 8px) {
   width: $size;
   height: $size;
   background: $btn-gradient;
@@ -51,17 +62,31 @@ a{
   border-radius: 50%;
   z-index: 2;
   padding: $pad;
-  img{
+  img {
     display: block;
     width: 100%;
   }
 }
-
+@mixin title($col) {
+  font: {
+    weight: bold;
+    size: $font-lr;
+  }
+  color: $col;
+}
+%input {
+  opacity: 0;
+  position: absolute;
+  display: block;
+  top: 0;
+  width: 120px;
+  height: 100%;
+}
 .modalCard {
-  &__container{
+  &__container {
     padding: 16px;
   }
-  &__title{
+  &__title {
     color: $primary-color;
     font: {
       weight: bold;
@@ -69,40 +94,77 @@ a{
     }
     margin-bottom: $font-lr;
   }
-  &__userIcon{
+  &__userIcon {
     width: 120px;
     height: 120px;
     border-radius: 50%;
     margin: 0 auto 16px;
     position: relative;
-    input[type="file"]{
-      opacity: 0;
-      position: absolute;
-      display: block;
-      top: 0;
-      width: 120px;
-      height: 100%;
+    input[type="file"] {
+      @extend %input;
     }
-    .userImg{
+    .userImg {
       width: 100%;
       height: 100%;
       object-fit: cover;
       border-radius: 50%;
     }
   }
-  &__Img{
+  &__post {
+    width: 100%;
+    margin-bottom: 16px;
+    position: relative;
+    input[type="file"] {
+      @extend %input;
+      width: 100%;
+    }
+    .dummy-img {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: $light-gray;
+      padding: 40px 32px;
+      img {
+        max-width: 65px;
+      }
+    }
+  }
+  &__lunchImg{
     width: 100%;
     height: 170px;
-    position: relative;
-    background: $light-gray;
+    img{
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
   }
+  // &__Img {
+  //   width: 100%;
+  //   height: 170px;
+  //   position: relative;
+  //   background: $light-gray;
+  // }
 }
 
-
-%psedo{
-  content: '';
+%psedo {
+  content: "";
   position: absolute;
 }
-.theme--light.v-application{
+%psedo-all {
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  margin: auto;
+}
+
+.theme--light.v-application {
   background: none;
+}
+.v-application ul,
+.v-application ol {
+  padding-left: 0;
+}
+.v-application p {
+  margin-bottom: 0;
 }
