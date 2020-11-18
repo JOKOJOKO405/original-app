@@ -36,8 +36,12 @@ body {
 a {
   text-decoration: none;
 }
+img{
+  width: 100%;
+  vertical-align: bottom;
+}
 .inner {
-  padding: 0 16px;
+  padding: 16px 16px 0;
 }
 li {
   list-style: none;
