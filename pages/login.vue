@@ -1,11 +1,9 @@
 <template>
-  <main>
-    <div class="inner">
+  <div class="inner">
       <Form />
       <Button label="ログイン" @event="onSubmit" />
       <GoogleLogin label="Googleアカウントでログイン" @google-login="googleLogin" />
-    </div>
-  </main>
+  </div>
 </template>
 
 <script>
