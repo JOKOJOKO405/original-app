@@ -1,11 +1,9 @@
 <template>
-  <main>
-    <div class="inner">
+  <div class="inner">
       <Form />
       <Button label="はじめる" @on-submit="onSubmit" />
       <GoogleLogin label="Googleアカウントではじめる" @google-login="googleLogin" />
     </div>
-  </main>
 </template>
 
 <script>
