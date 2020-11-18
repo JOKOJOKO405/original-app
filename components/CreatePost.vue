@@ -5,15 +5,19 @@
       ref="form"
       lazy-validation
     > 
-      <div class="modalCard__userIcon">
+      <div class="modalCard__post">
         <template v-if="lunch.image.val">
-          <img
-            :src="lunch.image.val"
-            class="userImg"
-          >
+          <div class="modalCard__lunchImg">
+            <img
+              :src="lunch.image.val"
+              class="userImg"
+            >
+          </div>
         </template>
         <template v-else>
-          <img src="@/assets/img/ico_user.svg" alt="">
+          <div class="dummy-img">
+            <img src="@/assets/img/ico_cutlery.svg" alt="">
+          </div>
         </template>
         <input
           type="file"
