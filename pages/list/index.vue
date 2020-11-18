@@ -1,7 +1,7 @@
 <template>
   <main>
     <ModalBase v-if="isModalOpened" @close-modal="closeModal">
-      ここに何かはいる
+      <CreatePost />
     </ModalBase>
     一覧
     <AddButton @add-card="addCard" />
@@ -11,15 +11,17 @@
 
 <script>
 import ModalBase from '~/components/ModalBase'
+import CreatePost from '~/components/CreatePost'
 import AddButton from '~/components/AddButton'
 export default {
   components: {
     ModalBase,
     AddButton,
+    CreatePost,
   },
   data(){
     return {
-      isModalOpened: true,
+      isModalOpened: false,
     }
   },
   methods: {
