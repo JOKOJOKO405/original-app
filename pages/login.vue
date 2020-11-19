@@ -16,7 +16,7 @@ export default {
   },
   methods: {
     googleLogin(){
-      console.log('ok')
+      this.$store.dispatch('user/googleLogin')
     },
     onSubmit(){
       this.$router.push('/list')

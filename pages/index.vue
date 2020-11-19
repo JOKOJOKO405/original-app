@@ -31,7 +31,7 @@ export default {
       this.$router.push('/login')
     },
     googleLogin(){
-      console.log('ok')
+      this.$store.dispatch('user/googleLogin')
     }
   }
 }
