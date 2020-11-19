@@ -8,12 +8,6 @@
         <li class="list__item">
           <DetailCard />
         </li>
-        <li class="list__item">
-          <DetailCard />
-        </li>
-        <li class="list__item">
-          <DetailCard />
-        </li>
       </ul>
       <ModalBase v-if="isModalOpened" @close-modal="closeModal">
         <CreatePost />
