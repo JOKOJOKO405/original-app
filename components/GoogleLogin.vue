@@ -1,5 +1,5 @@
 <template>
-  <button class="btn-google" @click="$emit('google-login')">
+  <button class="btn-google" type="submit">
     {{ label }}
   </button>
 </template>
