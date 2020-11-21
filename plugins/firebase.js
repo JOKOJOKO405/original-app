@@ -14,4 +14,9 @@ if (!firebase.apps.length) {
   firebase.initializeApp(config);
 }
 
-export default firebase
+export default ({ app }, inject) => {
+  inject('firebase', firebase)
+  inject('firestore', firebase.firestore())
+  inject('fireAuth', firebase.auth())
+  inject('fireStorage', firebase.storage())
+}
