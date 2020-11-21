@@ -39,16 +39,16 @@ export default {
   },
   methods: {
     isLoginPage(){
-      this.router.push('/login')
+      this.$router.push('/login')
     },
     isSignUpPage(){
       this.$router.push('/signup')
     },
     isHome(){
-      this.router.push('/')
+      this.$router.push('/')
     },
     isMyPage(userId){
-      this.router.push(`/user/${userId}`)
+      this.$router.push(`/user/${userId}`)
     }
   }
 };
