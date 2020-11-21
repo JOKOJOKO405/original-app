@@ -22,10 +22,9 @@
       ></v-text-field>
       <Button label="ログイン" @event="onSubmit" />
     </v-form>
-    <GoogleLogin
-        label="Googleアカウントでログイン"
-        @google-login="googleLogin"
-      />
+    <form @submit.prevent="googleLogin">
+      <GoogleLogin label="Googleアカウントでログイン" />
+    </form>
   </div>
 </template>
 
@@ -34,6 +33,7 @@ import Form from '~/components/Form';
 import Button from '~/components/Button'
 import GoogleLogin from '~/components/GoogleLogin'
 export default {
+  middleware: ['checkLogin'],
   components: {
     Form,
   },

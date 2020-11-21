@@ -3,7 +3,9 @@
   <TopBg />
     <div class="inner">
       <Logo />
-      <GoogleLogin label="Googleアカウントでログイン" @google-login="googleLogin" />
+      <form @submit.prevent="googleLogin">
+        <GoogleLogin label="Googleアカウントでログイン" />
+      </form>
       <Button label="メールアドレスでログイン" @event="onSubmit" />
       <p class="login__text"
         @click="onSubmit"
@@ -31,7 +33,7 @@ export default {
       this.$router.push('/login')
     },
     googleLogin(){
-      console.log('ok')
+      this.$store.dispatch('user/googleLogin')
     }
   }
 }

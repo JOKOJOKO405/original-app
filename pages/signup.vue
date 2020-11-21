@@ -1,6 +1,6 @@
 <template>
   <div class="inner">
-    <v-form ref="form" lazy-validation>
+    <v-form ref="form" @submit.prevent="googleLogin" lazy-validation>
       <span class="label">メールアドレス</span>
       <v-text-field
         v-model="form.email.val"
@@ -32,10 +32,9 @@
       ></v-text-field>
       <Button label="はじめる" @on-submit="onSubmit" />
     </v-form>
-    <GoogleLogin
-        label="Googleアカウントではじめる"
-        @google-login="googleLogin"
-      />
+    <form @submit.prevent="googleLogin">
+        <GoogleLogin label="Googleアカウントでログイン" />
+    </form>
   </div>
 </template>
 
