@@ -1,27 +1,101 @@
 <template>
   <div class="inner">
-      <Form />
+    <v-form ref="form" lazy-validation>
+      <span class="label">メールアドレス</span>
+      <v-text-field
+        v-model="form.email.val"
+        label="メールアドレス"
+        single-line
+        outlined
+        :rules="form.email.rules"
+      ></v-text-field>
+      <span class="label">パスワード</span>
+      <v-text-field
+        v-model="form.pass.val"
+        :append-icon="form.pass.isShow ? 'mdi-eye' : 'mdi-eye-off'"
+        :rules="form.pass.rules"
+        :type="form.pass.isShow ? 'text' : 'password'"
+        label="半角英数字8文字以上12文字以内"
+        single-line
+        outlined
+        @click:append="form.pass.isShow = !form.pass.isShow"
+      ></v-text-field>
+      <v-text-field
+        v-model="form.passConfirm.val"
+        :append-icon="form.passConfirm.isShow ? 'mdi-eye' : 'mdi-eye-off'"
+        :rules="form.passConfirm.rules"
+        :type="form.passConfirm.isShow ? 'text' : 'password'"
+        label="半角英数字8文字以上12文字以内"
+        single-line
+        outlined
+        @click:append="form.passConfirm.isShow = !form.passConfirm.isShow"
+      ></v-text-field>
       <Button label="はじめる" @on-submit="onSubmit" />
-      <GoogleLogin label="Googleアカウントではじめる" @google-login="googleLogin" />
-    </div>
+      <GoogleLogin
+        label="Googleアカウントではじめる"
+        @google-login="googleLogin"
+      />
+    </v-form>
+  </div>
 </template>
 
 <script>
-import Form from '~/components/Form';
-import Button from '~/components/Button'
-import GoogleLogin from '~/components/GoogleLogin'
+import Button from "~/components/Button";
+import GoogleLogin from "~/components/GoogleLogin";
 export default {
   components: {
-    Form,
+    Button,
+    GoogleLogin,
+  },
+  data(){
+    return {
+      form: {
+        email: {
+          val: "",
+          rules: [
+            (val) => !!val || "メールアドレスを入力してください",
+            (val) => {
+              const regex = /^[A-Za-z0-9]{1}[A-Za-z0-9_.-]*@{1}[A-Za-z0-9_.-]{1,}\.[A-Za-z0-9]{1,}$/;
+              return regex.test(val) || "入力が正しくありません";
+            },
+          ],
+        },
+        pass: {
+          val: "",
+          isShow: false,
+          rules: [
+            (val) => !!val || "パスワードを入力してください",
+            (val) => {
+              const regex = /^[A-Za-z0-9]*$/;
+              return regex.test(val) || "半角英数字で入力してください";
+            },
+            (val) => (val.length >= 8 && val.length < 13) || "8文字以上12文字以内で入力してください",
+          ],
+        },
+        passConfirm: {
+          val: "",
+          isShow: false,
+          rules: [
+            (val) => !!val || "パスワードを入力してください",
+            (val) => {
+              const regex = /^[A-Za-z0-9]*$/;
+              return regex.test(val) || "半角英数字で入力してください";
+            },
+            (val) => (val.length >= 8 && val.length < 13) || "8文字以上12文字以内で入力してください",
+            (val) => !!(val == this.form.pass.val) || 'パスワードが一致しません'
+          ],
+        },
+      },
+    }
   },
   methods: {
-    googleLogin(){
-      console.log('ok')
+    googleLogin() {
+      console.log("ok");
     },
-    onSubmit(){
-      this.$router.push('/list')
-    }
-  }
-  
-}
+    onSubmit() {
+      console.log('append');
+      // this.$router.push("/list");
+    },
+  },
+};
 </script>
