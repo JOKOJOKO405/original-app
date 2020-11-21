@@ -1,5 +1,5 @@
 <template>
-  <button class="btn-primary" @click.prevent="addEvent">
+  <button class="btn-primary" @click="$emit('event')">
     {{ label }}
   </button>
 </template>
