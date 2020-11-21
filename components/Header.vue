@@ -39,7 +39,7 @@ export default {
   },
   methods: {
     isLoginPage(){
-      this.router.push('/login')
+      this.$router.push('/login')
     },
     isSignUpPage(){
       this.$router.push('/signup')
