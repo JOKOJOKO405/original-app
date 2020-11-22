@@ -18,5 +18,8 @@ export default {
 <style lang="scss">
   .btn-primary{
     @include btn($primary-color, #fff);
+    &:visited{
+      color: #fff;
+    }
 }
 </style>
