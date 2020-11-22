@@ -1,6 +1,6 @@
 <template>
   <div class="inner">
-    <v-form ref="form" @submit.prevent="googleLogin" lazy-validation>
+    <v-form ref="form" @submit.prevent="onSubmit" lazy-validation>
       <span class="label">メールアドレス</span>
       <v-text-field
         v-model="form.email.val"
@@ -30,10 +30,10 @@
         outlined
         @click:append="form.passConfirm.isShow = !form.passConfirm.isShow"
       ></v-text-field>
-      <Button label="はじめる" @on-submit="onSubmit" />
+      <Button label="はじめる" type="submit" />
     </v-form>
     <form @submit.prevent="googleLogin">
-        <GoogleLogin label="Googleアカウントでログイン" />
+      <GoogleLogin label="Googleアカウントでログイン" />
     </form>
   </div>
 </template>
@@ -42,11 +42,12 @@
 import Button from "~/components/Button";
 import GoogleLogin from "~/components/GoogleLogin";
 export default {
+  middleware: ["checkLogin"],
   components: {
     Button,
     GoogleLogin,
   },
-  data(){
+  data() {
     return {
       form: {
         email: {
@@ -68,7 +69,9 @@ export default {
               const regex = /^[A-Za-z0-9]*$/;
               return regex.test(val) || "半角英数字で入力してください";
             },
-            (val) => (val.length >= 8 && val.length < 13) || "8文字以上12文字以内で入力してください",
+            (val) =>
+              (val.length >= 8 && val.length < 13) ||
+              "8文字以上12文字以内で入力してください",
           ],
         },
         passConfirm: {
@@ -80,14 +83,17 @@ export default {
               const regex = /^[A-Za-z0-9]*$/;
               return regex.test(val) || "半角英数字で入力してください";
             },
-            (val) => (val.length >= 8 && val.length < 13) || "8文字以上12文字以内で入力してください",
-            (val) => !!(val == this.form.pass.val) || 'パスワードが一致しません'
+            (val) =>
+              (val.length >= 8 && val.length < 13) ||
+              "8文字以上12文字以内で入力してください",
+            (val) =>
+              !!(val == this.form.pass.val) || "パスワードが一致しません",
           ],
         },
       },
-    }
+    };
   },
-  data(){
+  data() {
     return {
       form: {
         email: {
@@ -109,7 +115,9 @@ export default {
               const regex = /^[A-Za-z0-9]*$/;
               return regex.test(val) || "半角英数字で入力してください";
             },
-            (val) => (val.length >= 8 && val.length < 13) || "8文字以上12文字以内で入力してください",
+            (val) =>
+              (val.length >= 8 && val.length < 13) ||
+              "8文字以上12文字以内で入力してください",
           ],
         },
         passConfirm: {
@@ -121,19 +129,41 @@ export default {
               const regex = /^[A-Za-z0-9]*$/;
               return regex.test(val) || "半角英数字で入力してください";
             },
-            (val) => (val.length >= 8 && val.length < 13) || "8文字以上12文字以内で入力してください",
-            (val) => !!(val == this.form.pass.val) || 'パスワードが一致しません'
+            (val) =>
+              (val.length >= 8 && val.length < 13) ||
+              "8文字以上12文字以内で入力してください",
+            (val) =>
+              !!(val == this.form.pass.val) || "パスワードが一致しません",
           ],
         },
       },
-    }
+    };
   },
   methods: {
     googleLogin() {
       this.$store.dispatch("user/googleLogin");
     },
     onSubmit() {
-      this.$router.push("/list");
+      if (this.$refs.form.validate()) {
+        this.$fireAuth
+          .createUserWithEmailAndPassword(
+            this.form.email.val,
+            this.form.pass.val
+          )
+          .catch(function (error) {
+            // Handle Errors here.
+            var errorCode = error.code;
+            var errorMessage = error.message;
+            // ...
+          })
+          .then(function (auth) {
+            // 成功した時の処理
+            console.log(auth);
+            this.$router.push(`user/{$uid}`);
+          });
+      } else {
+        console.log("dismiss");
+      }
     },
   },
 };
