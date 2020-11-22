@@ -3,19 +3,20 @@ import firebaseInject from '~/plugins/firebase'
 // import firebase from "firebase";
 
 export const state = () => ({
-  uid: '',
-  name: '',
-  email: '',
-  isLogin: null
+  user: {}
 });
 
 export const mutations = {
   setLogin(state, auth) {
-    state.uid = auth.uid
-    state.isLogin = true
+    state.user = {
+      uid: auth.uid,
+      name: auth.displayName,
+      email: auth.email,
+      isLogin: true,
+    }
   },
   setLogOut(state) {
-    state.isLogin = null
+    state.user.isLogin = false
   }
 };
 
@@ -25,20 +26,21 @@ export const actions = {
     const googleAuth_provider = new firebase.auth.GoogleAuthProvider();
     // ログインページにリダイレクトしてログインを行う
     $nuxt.$fireAuth.signInWithRedirect(googleAuth_provider);
-    
   },
   setLogOut(){
     const msg = confirm('ログアウトしますか？')
     if(msg) {
-      firebase.auth().signOut().then(() => {
-        $nuxt.$router.push('/')
+      $nuxt.$fireAuth.signOut().then(() => {
+        $nuxt.$router.redirect('/')
       }).catch(function(error) {
         alert('ログインできません')
       });
     }
   },
   setLogin(context, auth){
-    context.commit('setLogin', auth)
+    let user = $nuxt.$fireAuth.currentUser
+    console.log(user);
+    context.commit('setLogin', user)
   }
 };
 
