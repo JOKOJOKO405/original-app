@@ -24,6 +24,7 @@ export default {
   plugins: [
     '@/plugins/firebase',
     '@/plugins/auth',
+    '@/plugins/userAuth',
   ],
 
   // Auto import components (https://go.nuxtjs.dev/config-components)
