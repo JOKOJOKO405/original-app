@@ -8,7 +8,7 @@
       </form>
       <Button label="メールアドレスでログイン" @event="onSubmit" />
       <p class="login__text"
-        @click="onSubmit"
+        @click="toSignUp"
       >
         アカウントをお持ちでない方はこちら
       </p>
@@ -34,6 +34,9 @@ export default {
     },
     googleLogin(){
       this.$store.dispatch('user/googleLogin')
+    },
+    toSignUp(){
+      this.$router.push('/signup')
     }
   }
 }
