@@ -4,6 +4,7 @@
     <v-form
       ref="form"
       lazy-validation
+      @submit.prevent="onSubmit"
     > 
       <div class="modalCard__userIcon">
         <template v-if="user.image.val">
@@ -36,7 +37,7 @@
         label="自己紹介"
         :counter="150"
       ></v-textarea>
-      <Button label="変更" @event="done" />
+      <Button label="変更" type="submit" />
     </v-form>
   </div>
 </template>
@@ -80,21 +81,52 @@ export default {
     }
   },
   methods: {
-    done(){
-      console.log('ok')
-    },
     selectedImage(e){
       const files = e.target.files;
       if (files.length === 0) return;
 
       const reader = new FileReader()
-      reader.onload = (e) => {
-        this.user.image.val = e.target.result
-      }
       reader.readAsDataURL(files[0])
-      // TODO 画像アップロード
-      console.log(this.user.image.val)
-    }
+
+      reader.onload = (e) => {
+        this.upload({
+          localImageFile: files[0],
+        })
+      }
+    },
+    async upload({ localImageFile }){
+      const user = await this.$auth()
+      // 未ログインでログイン画面に遷移
+      if(!user) this.$router.push('/login')
+      // ストレージオブジェクト作成
+      const storageRef = this.$fireStorage.ref()
+      // ファイルのパスを作成
+      const imageRef = storageRef.child(
+        `images/${user.uid}/${localImageFile.name}`
+      )
+      // ファイルのアップロード
+      const snapShot = await imageRef.put(localImageFile)
+      this.user.image.val = await snapShot.ref.getDownloadURL()
+    },
+    async onSubmit(){
+      const auth = await this.$auth()
+      if(!auth) this.$router.push('/login')
+      if(this.$refs.form.validate()){
+        try{
+          await this.$firestore
+            .collection('users')
+            .doc(auth.uid)
+            .set({
+              name: this.user.name.val,
+              comment: this.user.comment.val,
+              iconImage: this.user.image.val,
+            })
+            this.$router.push('/user/:id')
+        } catch(e){
+          console.log(e)
+        }
+      }
+    },
   }
 }
 </script>

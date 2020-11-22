@@ -41,7 +41,7 @@ export const actions = {
     let user = $nuxt.$fireAuth.currentUser
     console.log(user);
     context.commit('setLogin', user)
-  }
+  },
 };
 
 export const getters = {
