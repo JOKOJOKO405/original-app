@@ -27,12 +27,6 @@ export const actions = {
     $nuxt.$fireAuth.signInWithRedirect(googleAuth_provider);
     
   },
-  customLogin(email, password) {
-    $nuxt.$fireAuth.createUserWithEmailAndPassword(email, password).catch(function(error) {
-      var errorCode = error.code;
-      var errorMessage = error.message;
-    });
-  },
   setLogOut(){
     const msg = confirm('ログアウトしますか？')
     if(msg) {
