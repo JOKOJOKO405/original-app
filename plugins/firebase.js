@@ -1,4 +1,4 @@
-import firebase from 'firebase'
+import firebase from "firebase";
 
 const config = {
   apiKey: process.env.FIREBASE_PROJECT_apiKey,
