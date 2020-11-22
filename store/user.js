@@ -1,17 +1,22 @@
-import firebase from '~/plugins/firebase'
+import firebase from "firebase"
+import firebaseInject from '~/plugins/firebase'
+// import firebase from "firebase";
 
 export const state = () => ({
-  users: {}
+  uid: '',
+  name: '',
+  email: '',
+  isLogin: null
 });
 
 export const mutations = {
-  createUser(state, payload) {
-    state.users = {
-      name: payload.name,
-      email: payload.email,
-      comment: payload.comment,
-    }
+  setLogin(state, auth) {
+    state.uid = auth.uid
+    state.isLogin = true
   },
+  setLogOut(state) {
+    state.isLogin = null
+  }
 };
 
 export const actions = {
@@ -19,17 +24,29 @@ export const actions = {
     // Google プロバイダ オブジェクトのインスタンスを作成
     const googleAuth_provider = new firebase.auth.GoogleAuthProvider();
     // ログインページにリダイレクトしてログインを行う
-    firebase.auth().signInWithRedirect(googleAuth_provider);
+    $nuxt.$fireAuth.signInWithRedirect(googleAuth_provider);
+    
   },
-  customLogin() {
-    firebase.auth().createUserWithEmailAndPassword(email, password).catch(function(error) {
+  customLogin(email, password) {
+    $nuxt.$fireAuth.createUserWithEmailAndPassword(email, password).catch(function(error) {
       var errorCode = error.code;
       var errorMessage = error.message;
     });
   },
-  createUser(context, payload){
-    context.commit('createUser', payload)
+  setLogOut(){
+    const msg = confirm('ログアウトしますか？')
+    if(msg) {
+      firebase.auth().signOut().then(() => {
+        $nuxt.$router.push('/')
+      }).catch(function(error) {
+        alert('ログインできません')
+      });
+    }
+  },
+  setLogin(context, auth){
+    context.commit('setLogin', auth)
   }
 };
 
-export const getters = {};
+export const getters = {
+};
