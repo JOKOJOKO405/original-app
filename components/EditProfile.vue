@@ -1,6 +1,6 @@
 <template>
   <div class="modalCard__container">
-    <h3 class="modalCard__title">プロフィール編集</h3>
+    <h3 class="modalCard__title">{{ label }}</h3>
     <v-form
       ref="form"
       lazy-validation
@@ -45,6 +45,7 @@
 <script>
 import Button from '~/components/Button'
 export default {
+  props: ['label'],
   components: {
     Button,
   },
