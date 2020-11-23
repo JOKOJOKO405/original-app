@@ -3,9 +3,9 @@ export default ({ app }, inject) => {
     return new Promise((resolve) => {
       app.$fireAuth.onAuthStateChanged((auth) => {
         resolve(auth || null)
-        if(auth){
-          $nuxt.$store.dispatch('user/setLogin', auth)
-        }
+        // if(auth){
+        //   $nuxt.$store.dispatch('user/setLogin', auth)
+        // }
       })
     })
   })
