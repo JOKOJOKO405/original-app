@@ -32,10 +32,10 @@
       <p>まだ投稿がありません</p>
     </template>
 
-    <ModalBase v-if="isEditing" @close-modal="closeModal">
+    <ModalBase v-if="isEditing" @close="closeModal">
       <EditProfile label="プロフィール編集" />
     </ModalBase>
-    <ModalBase v-if="isCreate" @close-modal="closeModal">
+    <ModalBase v-if="isCreate" @close="closeModal">
       <CreatePost />
     </ModalBase>
     <AddButton @add-card="addCard" />
