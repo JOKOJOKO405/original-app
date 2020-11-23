@@ -1,5 +1,5 @@
 export default ({ app, redirect }, inject) => {
-  inject('user', async function(){
+  inject('userAuth', async function(){
     const auth = await app.$auth();
     // 未ログインでログイン画面へ
     if($auth){
