@@ -33,7 +33,7 @@
     </template>
 
     <ModalBase v-if="isEditing" @close-modal="closeModal">
-      <EditProfile />
+      <EditProfile label="プロフィール編集" />
     </ModalBase>
     <ModalBase v-if="isCreate" @close-modal="closeModal">
       <CreatePost />
