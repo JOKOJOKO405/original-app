@@ -1,6 +1,6 @@
 export default async function ({ redirect, app }) {
   if (await app.$userAuth()) {
-    // ログイン中だったらTOPページに遷移する
-    redirect('/user/')
+    // アカウント作成してあればユーザーページへ
+    redirect(`user/${user.uid}`)
   }
 }
