@@ -158,8 +158,7 @@ export default {
           })
           .then(function (auth) {
             // 成功した時の処理
-            console.log(auth);
-            this.$router.push(`user/{$uid}`);
+            this.$router.push('/account');
           });
       } else {
         console.log("dismiss");
