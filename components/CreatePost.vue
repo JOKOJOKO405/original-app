@@ -4,6 +4,7 @@
     <v-form
       ref="form"
       lazy-validation
+      @submit.prevent="onSubmit"
     > 
       <div class="modalCard__post">
         <template v-if="lunch.image.val">
@@ -51,7 +52,7 @@
         label="コメント"
         :counter="150"
       ></v-textarea>
-      <Button label="投稿する" @event="done" />
+      <Button label="投稿する" type="submit" />
     </v-form>
   </div>
 </template>
@@ -113,21 +114,62 @@ export default {
     }
   },
   methods: {
-    done(){
-      console.log('ok')
-    },
     selectedImage(e){
-      const files = e.target.files;
-      if (files.length === 0) return;
+      const files = e.target.files
+      if (files.length === 0) return
 
       const reader = new FileReader()
-      reader.onload = (e) => {
-        this.user.image.val = e.target.result
-      }
       reader.readAsDataURL(files[0])
-      // TODO 画像アップロード
-      console.log(this.user.image.val)
-    }
+
+      reader.onload = (e) => {
+        this.upload({
+          localImageFile: files[0],
+        })
+      }
+    },
+    async upload({ localImageFile }){
+      const user = await this.$auth()
+
+      if(!user) this.$router.push('/login')
+
+      // ストレージオブジェクト作成
+      const storageRef = this.$fireStorage.ref()
+
+      // ファイルパス作成
+      const imageRef = this.storageRef.child(
+        `images/${user.uid}/rooms/${localImageFile.name}`
+      )
+
+      // アップロード処理
+      const snapShot = await imageRef.put(localImageFile)
+      this.lunch.image.val = await snapShot.ref.getDownloadURL()
+
+    },
+    async onSubmit(){
+      // ログイン判定
+      const auth = await this.$auth()
+      if(!auth) this.$router.push('/login')
+
+      // バリデーション通過したら
+      if(this.$refs.form.validate()){
+        const data = {
+          user: auth.uid,
+          name: this.lunch.name.val,
+          menu: this.lunch.menu.val,
+          price: this.lunch.price.val,
+          comment: this.lunch.comment.val,
+          image: this.lunch.image.val,
+          createdAt: this.$firebase.firestore.FieldValue.serverTimestamp()
+        }
+
+        try {
+          await this.$firestore.collection('lunch').add(data)
+          this.$emit('close-modal')
+        } catch (error) {
+          console.log('error!');
+        }
+      }
+    },
   }
 }
 </script>
