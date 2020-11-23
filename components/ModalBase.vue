@@ -3,7 +3,7 @@
     <div class="modal__container">
       <div class="modal__content">
         <slot />
-        <button class="modal__btn" @click="$emit('close-modal')">
+        <button class="modal__btn" @click="$emit('close')">
           <img src="@/assets/img/ico_close.svg" alt="">
         </button>
       </div>
@@ -13,7 +13,11 @@
 
 <script>
 export default {
-  
+  methods: {
+    close() {
+      this.$emit('close')
+    }
+  }
 }
 </script>
 
