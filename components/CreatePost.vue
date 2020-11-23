@@ -136,7 +136,7 @@ export default {
       const storageRef = this.$fireStorage.ref()
 
       // ファイルパス作成
-      const imageRef = this.storageRef.child(
+      const imageRef = storageRef.child(
         `images/${user.uid}/rooms/${localImageFile.name}`
       )
 
@@ -164,7 +164,7 @@ export default {
 
         try {
           await this.$firestore.collection('lunch').add(data)
-          this.$emit('close-modal')
+          this.$emit('close')
         } catch (error) {
           console.log('error!');
         }
