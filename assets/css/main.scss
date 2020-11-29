@@ -48,7 +48,7 @@ li {
 }
 @mixin btn($bg, $col, $width: 100%) {
   background-color: $bg;
-  color: $col;
+  color: $col !important;
   text-align: center;
   font-weight: bold;
   padding: 10px;
