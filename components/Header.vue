@@ -6,13 +6,12 @@
           <img class="header__logo" src="@/assets/img/logo.svg" alt="" />
         </nuxt-link>
       </v-flex>
-      <template v-if="isLogined">
-      <!-- <template v-if="$store.state.isLogin === true"> -->
+      <template v-if="login">
         <div>
           <span class="header__link" @click="isHome">
             <img src="@/assets/img/ico_home.svg" alt="ホーム" />
           </span>
-          <span class="header__link" @click="isMyPage(uid)">
+          <span class="header__link" @click="isMyPage">
             <img src="@/assets/img/ico_user_w.svg" alt="マイページ" />
           </span>
           <form class="header__link" @submit.prevent="logOut">
@@ -34,7 +33,7 @@
 export default {
   data() {
     return {
-      isLogined: true
+      login: false,
     }
   },
   methods: {
@@ -47,7 +46,11 @@ export default {
     isHome(){
       this.$router.push('/')
     },
-    isMyPage(uid){
+    isMyPage(){
+      const uid = this.$fireAuth.currentUser.uid
+      if(uid == null){
+        this.$router.push('/login')
+      }
       this.$router.push(`/user/${uid}`)
     },
     logOut(){
@@ -55,9 +58,7 @@ export default {
     }
   },
   computed: {
-    isLogin(){
-      this.$store.state('isLogin')
-    }
+
   }
 };
 </script>

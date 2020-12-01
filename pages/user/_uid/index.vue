@@ -17,7 +17,7 @@
         </dd>
       </dl>
     </div>
-    <template v-if="user.posts">
+    <template v-if="user.posts.length > 0">
       <div class="user__post-title">
         <h4 class="title">投稿したランチ</h4>
         <p class="count">{{ user.posts.length }}件</p>
@@ -62,32 +62,7 @@ export default {
         name: "ユーザー1",
         image: "@/assets/img/ico_user.svg",
         // TODO dbからデータ吐き出し imageあとで削除
-        posts: [
-          {
-            id: "1",
-            image: require("@/assets/img/01.jpeg"),
-          },
-          {
-            id: "2",
-            image: require("@/assets/img/02.jpeg"),
-          },
-          {
-            id: "3",
-            image: require("@/assets/img/03.jpeg"),
-          },
-          {
-            id: "4",
-            image: require("@/assets/img/04.jpeg"),
-          },
-          {
-            id: "5",
-            image: require("@/assets/img/05.jpeg"),
-          },
-          {
-            id: "6",
-            image: require("@/assets/img/06.jpeg"),
-          },
-        ],
+        posts: [],
       },
       isUser: false,
       isEditing: false,

@@ -1,6 +1,9 @@
-export default async function ({ redirect, app }) {
-  if (await app.$auth()) {
-    // ログイン中だったらuserTOPページに遷移する
-    redirect('/user/')
-  }
-}
+// export default function ({ redirect, app }) {
+//   app.$fireAuth.onAuthStateChanged((user) => {
+//     const { uid, displayName, email } = user;
+//     if(user){
+//       $nuxt.$store.dispatch('user/setLogin', {uid, displayName, email});
+//       redirect(`/user/${uid}`)
+//     }
+//   })
+// }

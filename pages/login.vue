@@ -35,7 +35,6 @@
 import Button from "~/components/Button";
 import GoogleLogin from "~/components/GoogleLogin";
 export default {
-  middleware: ["checkLogin"],
   components: {
     Button,
     GoogleLogin,
@@ -81,14 +80,11 @@ export default {
         this.$fireAuth
           .signInWithEmailAndPassword(this.form.email.val, this.form.pass.val)
           .catch(function (error) {
-            // Handle Errors here.
-            var errorCode = error.code;
-            var errorMessage = error.message;
-            // ...
+            console.log(error);
           }).then(function (auth) {
             // 成功した時の処理
-            console.log(auth);
-            _this.$router.push(`user/{$uid}`);
+            const uid = auth.uid;
+            _this.$router.push(`/user/${uid}`);
           });
       } else{
         console.log('error!');

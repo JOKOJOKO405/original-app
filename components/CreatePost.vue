@@ -128,7 +128,7 @@ export default {
       }
     },
     async upload({ localImageFile }){
-      const user = await this.$auth()
+      const user = await this.$fireAuth.currentUser
 
       if(!user) this.$router.push('/login')
 
@@ -147,7 +147,8 @@ export default {
     },
     async onSubmit(){
       // ログイン判定
-      const auth = await this.$auth()
+      const auth = await this.$fireAuth.currentUser
+      const uid = auth.uid
       if(!auth) this.$router.push('/login')
 
       // バリデーション通過したら
@@ -164,7 +165,7 @@ export default {
 
         try {
           await this.$firestore.collection('lunch').add(data)
-          this.$emit('close')
+          this.$router.push(`user/${uid}`)
         } catch (error) {
           console.log('error!');
         }
