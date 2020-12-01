@@ -15,16 +15,23 @@ export const actions = {
     // Google プロバイダ オブジェクトのインスタンスを作成
     const googleAuth_provider = new firebase.auth.GoogleAuthProvider();
     // ログインページにリダイレクトしてログインを行う
-    $nuxt.$fireAuth.signInWithRedirect(googleAuth_provider)
+    await $nuxt.$fireAuth.signInWithRedirect(googleAuth_provider)
+    $nuxt.$router.push('')
   },
-  setLogOut(){
+  async setLogOut(){
     const msg = confirm('ログアウトしますか？')
     if(msg) {
-      $nuxt.$fireAuth.signOut().then(() => {
+      // $nuxt.$fireAuth.signOut().then(() => {
+      //   $nuxt.$router.push('/')
+      // }).catch(function(error) {
+      //   console.log(error);
+      // });
+      try{
+        await $nuxt.$fireAuth.signOut()
         $nuxt.$router.push('/')
-      }).catch(function(error) {
-        console.log(error);
-      });
+      }catch(error){
+        console.log(error)
+      }
     }
   },
   setLogin({commit}, user){
