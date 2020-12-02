@@ -22,6 +22,7 @@ import Logo from '~/components/Logo'
 import Button from '~/components/Button'
 import GoogleLogin from '~/components/GoogleLogin'
 export default {
+  middleware: ['checkLogin'],
   components: {
     TopBg,
     Logo,
