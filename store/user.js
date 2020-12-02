@@ -40,8 +40,17 @@ export const actions = {
   setLogin({commit}, user){
     commit('setLogin', user)
   },
+  setLogOut({commit}){
+    commit('setLogOut')
+  },
+  fetchPost({getters, commit}){
+    $nuxt.$firestore.collection('lunch').get().then((snapshot) => {
+
+    })
+  }
 };
 
 export const getters = {
-
+  userName: state => state.loginUser ? state.loginUser.displayName : 'ゲスト',
+  userIcon: state => state.loginUser ? state.loginUser.photoUrl : '',
 };
