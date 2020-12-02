@@ -6,7 +6,7 @@
           <img class="header__logo" src="@/assets/img/logo.svg" alt="" />
         </nuxt-link>
       </v-flex>
-      <template v-if="$store.loginUser != null">
+      <template v-if="login">
         <div>
           <span class="header__link" @click="isHome">
             <img src="@/assets/img/ico_home.svg" alt="ホーム" />
@@ -23,6 +23,7 @@
         <div>
           <span class="header__link" @click="isSignUpPage"> 新規登録 </span>
           <span class="header__link" @click="isLoginPage"> ログイン </span>
+          <span class="header__link" @click="logOut"> ログアウト </span>
         </div>
       </template>
     </v-layout>
