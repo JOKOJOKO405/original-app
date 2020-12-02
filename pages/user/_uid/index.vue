@@ -1,17 +1,19 @@
 <template>
   <div class="inner">
     <div class="user__container">
-      <h2 class="user__message">ようこそ、{{ user.name }}さん</h2>
+      <h2 class="user__message">ようこそ、{{ userName }}さん</h2>
       <dl class="user__prof">
         <dt>
-          <template v-if="isUser"></template>
+          <template v-if="userIcon">
+            <img :src="userIcon" alt="" />
+          </template>
           <template v-else>
             <img src="@/assets/img/ico_user.svg" alt="" />
           </template>
         </dt>
         <dd>
           <h3 class="user__name">
-            {{ user.name }}
+            {{ userName }}
           </h3>
           <Button label="プロフィール編集" @event="editProfile" />
         </dd>
@@ -23,8 +25,12 @@
         <p class="count">{{ user.posts.length }}件</p>
       </div>
       <ul class="user__posts">
-        <li v-for="(post, index) in user.posts" class="user__item" :key="post.id">
-          <img :src="post.image" alt="">
+        <li
+          v-for="(post, index) in user.posts"
+          class="user__item"
+          :key="post.id"
+        >
+          <img :src="post.image" alt="" />
         </li>
       </ul>
     </template>
@@ -43,25 +49,24 @@
 </template>
 
 <script>
-import ModalBase from "~/components/ModalBase"
-import EditProfile from "~/components/EditProfile"
-import CreatePost from "~/components/CreatePost"
-import AddButton from "~/components/AddButton"
-import Button from "~/components/Button"
+import ModalBase from "~/components/ModalBase";
+import EditProfile from "~/components/EditProfile";
+import CreatePost from "~/components/CreatePost";
+import AddButton from "~/components/AddButton";
+import Button from "~/components/Button";
+import { mapGetters } from "vuex";
 export default {
   components: {
     ModalBase,
     EditProfile,
     CreatePost,
     AddButton,
-    Button
+    Button,
   },
   data() {
     return {
       user: {
-        name: "ユーザー1",
-        image: "@/assets/img/ico_user.svg",
-        // TODO dbからデータ吐き出し imageあとで削除
+        name: "",
         posts: [],
       },
       isUser: false,
@@ -80,6 +85,9 @@ export default {
     addCard() {
       this.isCreate = true;
     },
+  },
+  computed: {
+    ...mapGetters('user', ['userName', 'userIcon']),
   },
 };
 </script>
@@ -105,42 +113,42 @@ export default {
       padding-left: 16px;
     }
   }
-  &__name{
+  &__name {
     @include title($font-color);
   }
-  &__posts{
+  &__posts {
     display: flex;
     flex-wrap: wrap;
     width: 100%;
   }
-  &__post-title{
+  &__post-title {
     display: flex;
     justify-content: space-between;
     align-items: baseline;
     margin-bottom: 8px;
     width: 100%;
-    .count{
+    .count {
       font-size: $font-sm;
       color: $light-gray;
     }
-    .title{
+    .title {
       font-size: $font-lg;
       font-weight: bold;
     }
   }
-  &__item{
+  &__item {
     position: relative;
     width: calc((100% / 3) - (16px / 3));
     margin-bottom: 8px;
-    &:not(:nth-child(3n)){
+    &:not(:nth-child(3n)) {
       margin-right: 8px;
     }
-    &::before{
-      content: '';
+    &::before {
+      content: "";
       display: block;
       padding-top: 100%;
     }
-    img{
+    img {
       position: absolute;
       @extend %psedo-all;
       width: 100%;
