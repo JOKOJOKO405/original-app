@@ -8,6 +8,9 @@ export const mutations = {
   setLogin(state, user) {
     state.loginUser = user.uid
   },
+  setLogOut(state){
+    state.loginUser = null
+  }
 };
 
 export const actions = {
@@ -16,7 +19,7 @@ export const actions = {
     const googleAuth_provider = new firebase.auth.GoogleAuthProvider();
     // ログインページにリダイレクトしてログインを行う
     await $nuxt.$fireAuth.signInWithRedirect(googleAuth_provider)
-    $nuxt.$router.push('')
+    $nuxt.$router.push('/user/')
   },
   async setLogOut(){
     const msg = confirm('ログアウトしますか？')
