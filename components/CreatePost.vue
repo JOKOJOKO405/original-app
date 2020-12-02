@@ -165,7 +165,7 @@ export default {
 
         try {
           await this.$firestore.collection('lunch').add(data)
-          this.$router.push(`user/${uid}`)
+          this.$router.push(`/user/${uid}`)
         } catch (error) {
           console.log('error!');
         }
