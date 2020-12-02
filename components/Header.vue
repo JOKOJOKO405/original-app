@@ -6,7 +6,7 @@
           <img class="header__logo" src="@/assets/img/logo.svg" alt="" />
         </nuxt-link>
       </v-flex>
-      <template v-if="login">
+      <template v-if="$store.loginUser != null">
         <div>
           <span class="header__link" @click="isHome">
             <img src="@/assets/img/ico_home.svg" alt="ホーム" />
