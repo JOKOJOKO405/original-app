@@ -2,6 +2,7 @@ import firebase from "firebase"
 
 export const state = () => ({
   loginUser: null,
+  posts: []
 });
 
 export const mutations = {
@@ -10,7 +11,7 @@ export const mutations = {
   },
   setLogOut(state){
     state.loginUser = null
-  }
+  },
 };
 
 export const actions = {
@@ -43,10 +44,8 @@ export const actions = {
   setLogOut({commit}){
     commit('setLogOut')
   },
-  fetchPost({getters, commit}){
-    $nuxt.$firestore.collection('lunch').get().then((snapshot) => {
-
-    })
+  addPosts({commit}, post){
+    commit('addPosts', post)
   }
 };
 

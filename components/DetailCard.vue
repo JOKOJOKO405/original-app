@@ -1,16 +1,16 @@
 <template>
   <dl class="card__body">
     <dt class="card__img">
-      <img src="" alt="">
+      <img :src="items.image" alt="">
     </dt>
     <dd class="card__content">
       <dl class="card__user">
         <dt><img src="" alt=""></dt>
-        <dd>ユーザー名</dd>
+        <dd>{{ items.user }}</dd>
       </dl>
-      <p class="card__title">店名</p>
+      <p class="card__title">{{ items.name }}</p>
       <p class="card__name">
-        メニュー名メニュー名メニュー名メニュー名
+        {{ items.menu }}
       </p>
     </dd>
   </dl>
@@ -18,7 +18,18 @@
 
 <script>
 export default {
-  
+  async mounted() {
+    this.$firestore.collection('lunch').get().then((snapshot) => {
+      snapshot.forEach(doc => {
+        this.items = doc.data()
+      })
+    })
+  },
+  data(){
+    return {
+      items: []
+    }
+  },
 }
 </script>
 
