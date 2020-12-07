@@ -1,14 +1,14 @@
 <template>
   <div class="detail__container">
     <div class="inner">
-      <div class="detail__userInfo">
+      <div class="detail__userInfo" v-for="detail in details" :key="detail.id">
         <dl>
           <dt><img src="@/assets/img/ico_user.svg" alt=""></dt>
           <dd>
-            ユーザー名
+            {{ detail.user }}
           </dd>
         </dl>
-        <p class="detail__date">2020.11.30</p>
+        <p class="detail__date"></p>
       </div>
     </div>
     <div class="detail__img">
@@ -19,7 +19,7 @@
       <h3 class="detail__menu">メニュー名メニュー名</h3>
       <p class="detail__price">2,980円</p>
       <div class="detail__comment">
-        コメントコメントコメントコメントコメントコメントコメントコメントコメントコメントコメントコメントコメントコメントコメントコメントコメントコメントコメントコメントコメントコメントコメントコメントコメントコメントコメントコメントコメントコメント
+        {{ detail }}
       </div>
     </div>
     <ModalBase v-if="isCreate" @close-modal="closeModal">
@@ -32,6 +32,7 @@
 <script>
 import CreatePost from '~/components/CreatePost'
 import AddButton from '~/components/AddButton'
+import { mapGetters } from 'vuex'
 export default {
   components: {
     CreatePost,
@@ -50,6 +51,9 @@ export default {
     addCard() {
       this.isCreate = true;
     },
+  },
+  computed: {
+    ...mapGetters('user', ['details'])
   },
 }
 </script>

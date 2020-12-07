@@ -44,9 +44,10 @@ export default {
   },
   methods: {
     showDetail(id){
+      this.$store.dispatch('user/showDetail', id)
       this.$router.push(`/list/${id}`)
     },
-  }
+  },
 };
 </script>
 
