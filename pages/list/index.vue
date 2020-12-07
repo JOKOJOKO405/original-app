@@ -4,11 +4,8 @@
       <SortDialog />
     </div>
     <div class="bg-col inner">
-      <ul class="list__container">
-        <li class="list__item">
-          <DetailCard />
-        </li>
-      </ul>
+      <DetailCard />
+          
       <ModalBase v-if="isModalOpened" @close-modal="closeModal">
         <CreatePost />
       </ModalBase>
@@ -50,19 +47,5 @@ export default {
 <style lang="scss">
   .bg-col{
     background: $bg-color;
-  }
-  .list{
-    &__container{
-      display: flex;
-      width: 100%;
-      flex-wrap: wrap;
-    }
-    &__item{
-      &:not(:nth-child(2n)){
-        margin-right: 16px;
-      }
-      margin-bottom: 16px;
-      width: calc(50% - 8px);
-    }
   }
 </style>
