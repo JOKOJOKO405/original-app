@@ -1,25 +1,25 @@
 <template>
   <div class="detail__container">
     <div class="inner">
-      <div class="detail__userInfo" v-for="detail in details" :key="detail.id">
+      <div class="detail__userInfo">
         <dl>
           <dt><img src="@/assets/img/ico_user.svg" alt=""></dt>
           <dd>
-            {{ detail.user }}
+            {{ posts.user }}
           </dd>
         </dl>
-        <p class="detail__date"></p>
       </div>
+      <p class="detail__date">{{ posts.createdAt | dateFilter }}</p>
     </div>
     <div class="detail__img">
-      <img src="@/assets/img/03.jpeg" alt="">
+      <img :src="posts.image" alt="">
     </div>
     <div class="inner">
-      <h2 class="detail__name">いきなりステーキ</h2>
-      <h3 class="detail__menu">メニュー名メニュー名</h3>
-      <p class="detail__price">2,980円</p>
+      <h2 class="detail__name">{{ posts.name }}</h2>
+      <h3 class="detail__menu">{{ posts.menu }}</h3>
+      <p class="detail__price">{{ posts.price }}</p>
       <div class="detail__comment">
-        {{ detail }}
+        {{ posts.comment }}
       </div>
     </div>
     <ModalBase v-if="isCreate" @close-modal="closeModal">
@@ -32,7 +32,8 @@
 <script>
 import CreatePost from '~/components/CreatePost'
 import AddButton from '~/components/AddButton'
-import { mapGetters } from 'vuex'
+import { mapState } from 'vuex'
+import moment from "moment"
 export default {
   components: {
     CreatePost,
@@ -53,13 +54,18 @@ export default {
     },
   },
   computed: {
-    ...mapGetters('user', ['details'])
+    ...mapState('user', ['posts'])
   },
+  filters: {
+    dateFilter(createdAt) {
+      return moment(createdAt).format("YYYY/MM/DD HH:mm:ss");
+    },
+  }
 }
 </script>
 
 <style lang="scss">
 .detail__userInfo{
-  margin-bottom: 16px;
+  margin-bottom: 8px;
 }
 </style>

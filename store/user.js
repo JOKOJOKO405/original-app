@@ -2,7 +2,15 @@ import firebase from "firebase";
 
 export const state = () => ({
   loginUser: null,
-  posts: []
+  posts: {
+    name: '',
+    price: '',
+    comment: '',
+    user: '',
+    createdAt: '',
+    image: '',
+    menu: '',
+  }
 });
 
 export const mutations = {
@@ -13,14 +21,16 @@ export const mutations = {
     state.loginUser = null;
   },
   showDetail(state, payload) {
-    state.posts.push({
+    state.posts = {
+      id: payload.id,
       name: payload.name,
       price: payload.price,
       comment: payload.comment,
       createdAt: payload.createdAt,
       user: payload.user,
       image: payload.image,
-    })
+      menu: payload.menu,
+    }
   }
 };
 
@@ -60,8 +70,19 @@ export const actions = {
       .doc(id)
       .get()
       .then(doc => {
-        const data = doc.data();
-        commit("showDetail", data);
+        const postId = doc.id
+        const detail = doc.data()
+        const payload = {
+          id: postId,
+          name: detail.name,
+          price: detail.price,
+          comment: detail.comment,
+          createdAt: detail.createdAt.toDate(),
+          user: detail.user,
+          image: detail.image,
+          menu: detail.menu,
+        }
+        commit("showDetail", payload);
       });
   }
 };
