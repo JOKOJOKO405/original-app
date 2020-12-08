@@ -56,12 +56,31 @@ import AddButton from "~/components/AddButton";
 import Button from "~/components/Button";
 import { mapGetters } from "vuex";
 export default {
+  middleware: ['checkLogin'],
   components: {
     ModalBase,
     EditProfile,
     CreatePost,
     AddButton,
     Button,
+  },
+  async created() {
+    const user = this.$fireAuth.currentUser
+    console.log(user)
+    this.$firestore
+      .collection("lunch")
+      .where('user', '==', user.uid)
+      .get()
+      .then((snapshot) => {
+        snapshot.forEach((doc) => {
+          const id = doc.id
+          const data = doc.data()
+          this.user.posts.push({
+            id,
+            ...data
+          })
+        });
+      });
   },
   data() {
     return {
