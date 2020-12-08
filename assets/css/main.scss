@@ -170,12 +170,16 @@ li {
           border-radius: 50%;
         }
       }
+      dd{
+        width: calc(100% - 35px);
+      }
     }
   }
   &__date{
       font-size: 14px;
       color: $light-gray;
       text-align: right;
+      margin-bottom: 8px !important;
     }
   &__btns{
     display: flex;
