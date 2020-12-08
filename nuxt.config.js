@@ -41,6 +41,7 @@ export default {
   modules: [
     '@nuxtjs/style-resources',
     '@nuxtjs/dotenv',
+    ['@nuxtjs/moment', ['ja']]
   ],
   styleResources: {
     scss: [
