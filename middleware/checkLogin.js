@@ -1,9 +1,9 @@
-export default function ({ redirect, app, store }) {
-  app.$fireAuth.onAuthStateChanged((user) => {
+export default async function ({ redirect, app, store }) {
+  await app.$fireAuth.onAuthStateChanged((user) => {
     // const { uid, displayName, email } = user;
-    const uid = user.uid
     if(user){
-      store.dispatch('user/setLogin', user);
+      const uid = user.uid
+      store.dispatch('user/setLogin', uid);
       redirect(`/user/${uid}`)
     }else{
       redirect('login')
