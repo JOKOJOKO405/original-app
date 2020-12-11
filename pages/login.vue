@@ -41,13 +41,13 @@ export default {
     }
   },
   async mounted(){
-    this.$fireAuth.onAuthStateChanged(user => {
+    await this.$fireAuth.onAuthStateChanged(user => {
       this.isWaiting = false
       if (user) {
         const uid = user.uid
         this.$store.dispatch('user/setLogin', uid)
         console.log(uid)
-        // this.$router.push(`/user/${uid}`)
+        this.$router.push(`/user/${uid}`)
       } else {
         this.$router.push('/login')
       }
