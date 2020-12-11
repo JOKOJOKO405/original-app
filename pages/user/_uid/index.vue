@@ -19,7 +19,7 @@
         </dd>
       </dl>
     </div>
-    <template v-if="user.posts.length > 0">
+    <template>
       <div class="user__post-title">
         <h4 class="title">投稿したランチ</h4>
         <p class="count">{{ user.posts.length }}件</p>
@@ -29,14 +29,15 @@
           v-for="(post, index) in user.posts"
           class="user__item"
           :key="post.id"
+          @click="showDetail(post.id)"
         >
           <img :src="post.image" alt="" />
         </li>
       </ul>
     </template>
-    <template v-else>
+    <!-- <template v-else>
       <p>まだ投稿がありません</p>
-    </template>
+    </template> -->
 
     <ModalBase v-if="isEditing" @close="closeModal">
       <EditProfile label="プロフィール編集" />
@@ -56,7 +57,7 @@ import AddButton from "~/components/AddButton";
 import Button from "~/components/Button";
 import { mapGetters } from "vuex";
 export default {
-  middleware: ['checkLogin'],
+  // middleware: ['checkLogin'],
   components: {
     ModalBase,
     EditProfile,
@@ -64,30 +65,16 @@ export default {
     AddButton,
     Button,
   },
-  async created() {
-    const user = this.$fireAuth.currentUser
-    console.log(user)
-    this.$firestore
-      .collection("lunch")
-      .where('user', '==', user.uid)
-      .get()
-      .then((snapshot) => {
-        snapshot.forEach((doc) => {
-          const id = doc.id
-          const data = doc.data()
-          this.user.posts.push({
-            id,
-            ...data
-          })
-        });
-      });
+  asyncData(){
+    return{
+      user: {
+          name: "",
+          posts: [],
+      }
+    }
   },
   data() {
     return {
-      user: {
-        name: "",
-        posts: [],
-      },
       isUser: false,
       isEditing: false,
       isCreate: false,
@@ -104,9 +91,40 @@ export default {
     addCard() {
       this.isCreate = true;
     },
+    showDetail(id){
+      this.$router.push(`/user/list/${id}`)
+    },
   },
-  computed: {
-    ...mapGetters('user', ['userName', 'userIcon']),
+  // computed: {
+  //   ...mapGetters('user', ['userName', 'userIcon']),
+  // },
+  async mounted() {
+    const _this = this;
+    this.$fireAuth.onAuthStateChanged(function (user) {
+      if (user) {
+        const uid = user.uid
+        try {
+          _this.$firestore
+            .collection('lunch')
+            .where("user", "==", uid)
+            .get()
+            .then((snapshot) => {
+              snapshot.forEach((doc) => {
+                const id = doc.id;
+                const data = doc.data();
+                _this.user.posts.push({
+                  id,
+                  ...data,
+                });
+              });
+            });
+        }catch(error){
+          console.log(error);
+        }
+      } else {
+        this.$router.push("/login");
+      }
+    });
   },
 };
 </script>
