@@ -6,7 +6,7 @@
     <div class="bg-col inner">
       <DetailCard />
           
-      <ModalBase v-if="isModalOpened" @close-modal="closeModal">
+      <ModalBase v-if="isModalOpened" @close="closeModal">
         <CreatePost />
       </ModalBase>
       <AddButton @add-card="addCard" />
