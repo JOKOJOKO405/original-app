@@ -14,9 +14,9 @@
 <script>
 export default {
   methods: {
-    close() {
-      this.$emit('close')
-    }
+    // closeModal() {
+    //   this.$emit('closeModal')
+    // }
   }
 }
 </script>
