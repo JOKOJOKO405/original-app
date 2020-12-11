@@ -28,7 +28,7 @@
         </div>
       </div>
     </div>
-    <ModalBase v-if="isPostEdit" @close-modal="closeModal">
+    <ModalBase v-if="isPostEdit" @close="closeModal">
       <EditPost />
     </ModalBase>
   </div>
