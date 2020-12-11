@@ -14,8 +14,8 @@ export const state = () => ({
 });
 
 export const mutations = {
-  setLogin(state, user) {
-    state.loginUser = user.uid;
+  setLogin(state, uid) {
+    state.loginUser = uid;
   },
   setLogOut(state) {
     state.loginUser = null;
@@ -40,7 +40,6 @@ export const actions = {
     const googleAuth_provider = new firebase.auth.GoogleAuthProvider();
     // ログインページにリダイレクトしてログインを行う
     await $nuxt.$fireAuth.signInWithRedirect(googleAuth_provider);
-    $nuxt.$router.push("/user/");
   },
   async setLogOut() {
     const msg = confirm("ログアウトしますか？");
@@ -58,8 +57,8 @@ export const actions = {
       }
     }
   },
-  setLogin({ commit }, user) {
-    commit("setLogin", user);
+  setLogin({ commit }, uid) {
+    commit("setLogin", uid);
   },
   setLogOut({ commit }) {
     commit("setLogOut");
@@ -90,7 +89,4 @@ export const actions = {
 export const getters = {
   userName: state => (state.loginUser ? state.loginUser.displayName : "ゲスト"),
   userIcon: state => (state.loginUser ? state.loginUser.photoUrl : ""),
-  details: state => {
-    return state.posts;
-  }
 };
