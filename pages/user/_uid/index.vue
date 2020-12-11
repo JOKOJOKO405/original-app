@@ -19,7 +19,7 @@
         </dd>
       </dl>
     </div>
-    <template>
+    <template v-if="user.posts.length">
       <div class="user__post-title">
         <h4 class="title">投稿したランチ</h4>
         <p class="count">{{ user.posts.length }}件</p>
@@ -35,9 +35,9 @@
         </li>
       </ul>
     </template>
-    <!-- <template v-else>
+    <template v-else>
       <p>まだ投稿がありません</p>
-    </template> -->
+    </template>
 
     <ModalBase v-if="isEditing" @close="closeModal">
       <EditProfile label="プロフィール編集" />
