@@ -6,7 +6,7 @@
           <img class="header__logo" src="@/assets/img/logo.svg" alt="" />
         </nuxt-link>
       </v-flex>
-      <template v-if="this.$fireAuth.currentUser.uid !== null">
+      <template v-if="isLogin">
         <div>
           <span class="header__link" @click="isHome">
             <img src="@/assets/img/ico_home.svg" alt="ホーム" />
@@ -19,7 +19,7 @@
           </form>
         </div>
       </template>
-      <template v-else>
+      <template v-else-if="!isLogin">
         <div>
           <span class="header__link" @click="isSignUpPage"> 新規登録 </span>
           <span class="header__link" @click="isLoginPage"> ログイン </span>
@@ -31,10 +31,19 @@
 
 <script>
 export default {
-  data() {
+  asyncData() {
     return {
-      login: false,
+      isLogin: false,
     }
+  },
+  async mounted() {
+    this.$fireAuth.onAuthStateChanged(user => {
+      if(user){
+        this.isLogin = true;
+      }else{
+        this.isLogin = false;
+      }
+    })
   },
   methods: {
     isLoginPage(){
