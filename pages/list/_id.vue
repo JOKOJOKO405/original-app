@@ -22,7 +22,7 @@
         {{ posts.comment }}
       </div>
     </div>
-    <ModalBase v-if="isCreate" @close-modal="closeModal">
+    <ModalBase v-if="isCreate" @close="closeModal">
       <CreatePost />
     </ModalBase>
     <AddButton @add-card="addCard" />
