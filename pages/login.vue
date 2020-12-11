@@ -1,6 +1,6 @@
 <template>
   <div class="inner">
-    <v-form ref="form" @submit.prevent="onSubmit" lazy-validation>
+    <v-form v-if="!isWaiting" ref="form" @submit.prevent="onSubmit" lazy-validation>
       <span class="label">メールアドレス</span>
       <v-text-field
         v-model="form.email.val"
@@ -35,7 +35,24 @@
 import Button from "~/components/Button";
 import GoogleLogin from "~/components/GoogleLogin";
 export default {
-  middleware: ['checkLogin'],
+  asyncData () {
+    return {
+      isWaiting: true,
+    }
+  },
+  async mounted(){
+    this.$fireAuth.onAuthStateChanged(user => {
+      this.isWaiting = false
+      if (user) {
+        const uid = user.uid
+        this.$store.dispatch('user/setLogin', uid)
+        console.log(uid)
+        // this.$router.push(`/user/${uid}`)
+      } else {
+        this.$router.push('/login')
+      }
+    })
+  },
   components: {
     Button,
     GoogleLogin,
@@ -74,10 +91,10 @@ export default {
     googleLogin() {
       this.$store.dispatch("user/googleLogin");
     },
-    onSubmit() {
+    async onSubmit() {
       // var _this = this
       if (this.$refs.form.validate()) {
-        this.$fireAuth
+        await this.$fireAuth
           .signInWithEmailAndPassword(this.form.email.val, this.form.pass.val)
           .catch(function (error) {
             console.log(error);
