@@ -14,6 +14,7 @@ export default {
     ]
   },
   ssr: false,
+  static: true,
 
   // Global CSS (https://go.nuxtjs.dev/config-css)
   css: [
